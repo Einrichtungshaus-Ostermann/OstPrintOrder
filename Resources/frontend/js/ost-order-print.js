@@ -19,6 +19,16 @@
 
 
 
+
+        configuration: {
+            checkPrinterUrl: null,
+            printOrderUrl: null
+        },
+
+
+
+
+
         // on initialization
         init: function ()
         {
@@ -30,7 +40,8 @@
             me.number = me.$el.data( "order-number" );
 
 
-
+            me.configuration.checkPrinterUrl = ostPrintOrderConfiguration.checkPrinterUrl;
+            me.configuration.printOrderUrl = ostPrintOrderConfiguration.printOrderUrl;
 
 
             // admin delete
@@ -60,7 +71,7 @@
                     // try to login
                     $.ostFoundationJson.get(
                         {
-                            url: "http://inhouse-ost-5501/OstPrintOrder/checkPrinter",
+                            url: me.configuration.checkPrinterUrl,
                             method: "post",
                             params: { printer: number }
                         },
@@ -81,7 +92,7 @@
                             // finally print the order
                             $.ostFoundationJson.get(
                                 {
-                                    url: "http://inhouse-ost-5501/OstPrintOrder/printOrder",
+                                    url: me.configuration.printOrderUrl,
                                     method: "post",
                                     params: { number: me.number, printer: number }
                                 },
