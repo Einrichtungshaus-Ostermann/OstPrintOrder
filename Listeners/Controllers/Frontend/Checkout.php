@@ -50,7 +50,7 @@ class Checkout
      *
      * @param EventArgs $arguments
      */
-    public function onPostDispatch(EventArgs $arguments)
+    public function onPreDispatch(EventArgs $arguments)
     {
         /* @var $controller Controller */
         $controller = $arguments->get('subject');

@@ -22,10 +22,10 @@
 
 
 
-        <service id="ost_print_order.listeners.controllers.frontend.post_dispatch" class="OstPrintOrder\Listeners\Controllers\Frontend\Checkout">
+        <service id="ost_print_order.listeners.controllers.frontend.re_dispatch" class="OstPrintOrder\Listeners\Controllers\Frontend\Checkout">
             <argument type="string">%ost_print_order.view_dir%</argument>
             <argument type="service" id="ost_print_order.configuration" />
-            <tag name="shopware.event_listener" method="onPostDispatch" event="Enlight_Controller_Action_PostDispatch_Frontend_Checkout" />
+            <tag name="shopware.event_listener" method="onPreDispatch" event="Enlight_Controller_Action_PreDispatch_Frontend" />
         </service>
 
 
