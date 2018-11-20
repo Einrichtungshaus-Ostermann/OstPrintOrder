@@ -7,33 +7,21 @@
 
 
 
-
-
-
 {* append our javascript *}
 {block name='frontend_index_header_javascript_jquery'}
 
+    {* our plugin configuration *}
+    <script type="text/javascript">
 
-        {* our plugin configuration *}
-        <script type="text/javascript">
+        {* javascript variables *}
+        var ostPrintOrderConfiguration = {
+            checkPrinterUrl:       '{url controller="OstPrintOrder" action="checkPrinter"}',
+            printOrderUrl:       '{url controller="OstPrintOrder" action="printOrder"}'
+        };
 
-            {* javascript variables *}
-            var ostPrintOrderConfiguration = {
-
-
-
-                checkPrinterUrl:       '{url controller="OstPrintOrder" action="checkPrinter"}',
-                printOrderUrl:       '{url controller="OstPrintOrder" action="printOrder"}'
-            };
-
-        </script>
-
-
+    </script>
 
     {* smarty parent *}
     {$smarty.block.parent}
 
 {/block}
-
-
-

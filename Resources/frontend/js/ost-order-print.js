@@ -1,33 +1,30 @@
 
+/**
+ * Einrichtungshaus Ostermann GmbH & Co. KG - Print Order
+ *
+ * @package   OstPrintOrder
+ *
+ * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>
+ * @copyright 2018 Einrichtungshaus Ostermann GmbH & Co. KG
+ * @license   proprietary
+ */
+
 ;(function ($) {
 
     // use strict mode
     "use strict";
 
-
-
-
-
-
     // detail plugin
     $.plugin( "ostOrderPrint", {
 
-
-
-
+        // order number
         number: null,
 
-
-
-
+        // configuration
         configuration: {
             checkPrinterUrl: null,
             printOrderUrl: null
         },
-
-
-
-
 
         // on initialization
         init: function ()
@@ -35,23 +32,16 @@
             // get this
             var me = this;
 
-
-
+            // get the order number
             me.number = me.$el.data( "order-number" );
 
-
+            // get configuration
             me.configuration.checkPrinterUrl = ostPrintOrderConfiguration.checkPrinterUrl;
             me.configuration.printOrderUrl = ostPrintOrderConfiguration.printOrderUrl;
-
 
             // admin delete
             me._on( me.$el, 'click', $.proxy( me.onPrintClick, me ) );
         },
-
-
-
-
-
 
         // ...
         onPrintClick: function ( event )
@@ -66,7 +56,6 @@
                     castToInteger: false
                 },
                 function( number ) {
-
 
                     // try to login
                     $.ostFoundationJson.get(
@@ -85,10 +74,6 @@
                                     }
                                 });
 
-
-
-
-
                             // finally print the order
                             $.ostFoundationJson.get(
                                 {
@@ -105,21 +90,11 @@
 
                                 }
                             );
-
-
                         }
                     );
-
-
                 }
             );
         },
-
-
-
-
-
-
 
         // on destroy
         destroy: function()
@@ -130,25 +105,9 @@
             // call the parent
             me._destroy();
         }
-
-
-
     });
-
-
-
 
     // call our plugin
     $( "body .ost-order-print--button" ).ostOrderPrint();
 
-
-
-
-
-
-
-
 })(jQuery);
-
-
-

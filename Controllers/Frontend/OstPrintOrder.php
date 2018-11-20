@@ -1,12 +1,17 @@
 <?php declare(strict_types=1);
 
+/**
+ * Einrichtungshaus Ostermann GmbH & Co. KG - Print Order
+ *
+ * @package   OstPrintOrder
+ *
+ * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>
+ * @copyright 2018 Einrichtungshaus Ostermann GmbH & Co. KG
+ * @license   proprietary
+ */
 
-
-
-use Shopware\Components\CSRFWhitelistAware;
 use OstPrintOrder\Services\PrinterServiceInterface;
-
-
+use Shopware\Components\CSRFWhitelistAware;
 
 class Shopware_Controllers_Frontend_OstPrintOrder extends Enlight_Controller_Action implements CSRFWhitelistAware
 {
@@ -22,8 +27,6 @@ class Shopware_Controllers_Frontend_OstPrintOrder extends Enlight_Controller_Act
         $this->get('template')->addTemplateDir($viewDir);
         parent::preDispatch();
     }
-
-
 
     /**
      * ...
@@ -42,8 +45,6 @@ class Shopware_Controllers_Frontend_OstPrintOrder extends Enlight_Controller_Act
         ));
     }
 
-
-
     /**
      * ...
      */
@@ -51,31 +52,26 @@ class Shopware_Controllers_Frontend_OstPrintOrder extends Enlight_Controller_Act
     {
     }
 
-
-
-
-
     /**
      * ...
      */
     public function checkPrinterAction()
     {
-        $number = $this->Request()->getParam( "printer" );
+        // get printer number
+        $number = $this->Request()->getParam('printer');
 
         /* @var $printerService PrinterServiceInterface */
-        $printerService = Shopware()->Container()->get( "ost_print_order.printer_service" );
+        $printerService = Shopware()->Container()->get('ost_print_order.printer_service');
 
-
+        // get every printer
         $printer = $printerService->getList();
 
-
-
-        $isAvailable = ( in_array( "PRT" . $number, $printer ) );
-
+        // valid printer?
+        $isAvailable = (in_array('PRT' . $number, $printer));
 
         // create response
         $response = [
-            'success' => true,
+            'success'     => true,
             'isAvailable' => $isAvailable
         ];
 
@@ -84,24 +80,20 @@ class Shopware_Controllers_Frontend_OstPrintOrder extends Enlight_Controller_Act
         die();
     }
 
-
-
-
     /**
      * ...
      */
     public function printOrderAction()
     {
-        $number = $this->Request()->getParam( "number" );
-        $printer = $this->Request()->getParam( "printer" );
+        // get parameters
+        $number = $this->Request()->getParam('number');
+        $printer = $this->Request()->getParam('printer');
 
         /* @var $printerService PrinterServiceInterface */
-        $printerService = Shopware()->Container()->get( "ost_print_order.printer_service" );
+        $printerService = Shopware()->Container()->get('ost_print_order.printer_service');
 
-
-        $printed = $printerService->printOrder( $number, $printer );
-
-
+        // try to print order
+        $printed = $printerService->printOrder($number, $printer);
 
         // create response
         $response = [
@@ -112,8 +104,4 @@ class Shopware_Controllers_Frontend_OstPrintOrder extends Enlight_Controller_Act
         echo json_encode($response);
         die();
     }
-
-
-
-
 }

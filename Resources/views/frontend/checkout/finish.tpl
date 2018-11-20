@@ -7,45 +7,26 @@
 
 
 
-
-
+{* set default message and printer button *}
 {block name='frontend_checkout_finish_teaser'}
+
     <div class="finish--teaser panel has--border is--rounded">
 
-
-
-
-            <h2 class="panel--title teaser--title is--align-center">
-                Vielen Dank für Ihre Bestellung!
-            </h2>
-
-
-
+        <h2 class="panel--title teaser--title is--align-center">
+            Vielen Dank für Ihre Bestellung!
+        </h2>
 
         <div class="panel--body is--wide is--align-center">
-
             <p>
                 Sie können die Bestellung nun an Ihrem PC ausdrucken.
             </p>
-
-
             <p class="teaser--actions">
-
-                    <a href="#" class="ost-order-print--button btn is--primary teaser--btn-print" title="Drucken" data-order-number="{$sOrderNumber}">
-                        Drucken
-                    </a>
+                <a href="#" class="ost-order-print--button btn is--primary teaser--btn-print" title="Drucken" data-order-number="{$sOrderNumber}">
+                    Drucken
+                </a>
             </p>
-
-
         </div>
 
-
     </div>
+
 {/block}
-
-
-
-
-
-
-

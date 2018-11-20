@@ -1,20 +1,21 @@
 <?php declare(strict_types=1);
 
-
+/**
+ * Einrichtungshaus Ostermann GmbH & Co. KG - Print Order
+ *
+ * @package   OstPrintOrder
+ *
+ * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>
+ * @copyright 2018 Einrichtungshaus Ostermann GmbH & Co. KG
+ * @license   proprietary
+ */
 
 namespace OstPrintOrder\Services;
 
-
-
 use OstCogitoSoapApi\Bundles\OstCogitoSoapApiBundle\CogitoApiService;
-
-
 
 class PrinterService implements PrinterServiceInterface
 {
-
-
-
     /**
      * ...
      *
@@ -22,72 +23,60 @@ class PrinterService implements PrinterServiceInterface
      */
     private $configuration;
 
-
-
     /**
      * ...
      *
-     * @return string
+     * @param array $configuration
      */
-    public function __construct( array $configuration )
+    public function __construct(array $configuration)
     {
         $this->configuration = $configuration;
     }
 
-
-
-
     /**
-     * ...
-     *
+     * {@inheritdoc}
      */
     public function getList(): array
     {
-        if ( $this->configuration['live'] == false )
-            return array(
-                "PRT18",
-                "PRT100"
-            );
-
+        // are we not live?
+        if ($this->configuration['live'] === false) {
+            // return default printers
+            return [
+                'PRT18',
+                'PRT100'
+            ];
+        }
 
         /* @var $api CogitoApiService */
-        $api = Shopware()->Container()->get( "ost_cogito_soap_api.cogito_api_service" );
+        $api = Shopware()->Container()->get('ost_cogito_soap_api.cogito_api_service');
 
+        // return list by cogito api
         return $api->getPrinterList();
-
-
     }
 
-
-
-
-    
-
     /**
-     * ...
-     *
+     * {@inheritdoc}
      */
-    public function printOrder( $orderNumber, $printerNumber ): bool
+    public function printOrder($orderNumber, $printerNumber): bool
     {
-        if ( $this->configuration['live'] == false )
-        {
-            if ( $printerNumber == "18" )
+        // are we not live?
+        if ($this->configuration['live'] === false) {
+            // prt-18 is valid printer
+            if ($printerNumber === '18') {
                 return true;
+            }
 
+            // every other is invalid
             return false;
         }
 
-
-
         /* @var $api CogitoApiService */
-        $api = Shopware()->Container()->get( "ost_cogito_soap_api.cogito_api_service" );
+        $api = Shopware()->Container()->get('ost_cogito_soap_api.cogito_api_service');
 
-        $api->printOrder( $orderNumber, "PRT" . $printerNumber );
+        // print by cogito api
+        $api->printOrder($orderNumber, 'PRT' . $printerNumber);
 
+        // all good
         return true;
-
-
     }
-
-
 }

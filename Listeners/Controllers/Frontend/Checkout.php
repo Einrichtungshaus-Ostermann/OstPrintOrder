@@ -1,14 +1,18 @@
 <?php declare(strict_types=1);
 
-
-
+/**
+ * Einrichtungshaus Ostermann GmbH & Co. KG - Print Order
+ *
+ * @package   OstPrintOrder
+ *
+ * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>
+ * @copyright 2018 Einrichtungshaus Ostermann GmbH & Co. KG
+ * @license   proprietary
+ */
 namespace OstPrintOrder\Listeners\Controllers\Frontend;
 
 use Enlight_Controller_Action as Controller;
 use Enlight_Event_EventArgs as EventArgs;
-use Enlight_Hook_HookArgs as HookArgs;
-use Shopware\Models\Order\Order;
-use Shopware\Components\Model\ModelManager;
 
 class Checkout
 {
@@ -19,16 +23,12 @@ class Checkout
      */
     protected $viewDir;
 
-
-
     /**
      * ...
      *
      * @var array
      */
     protected $configuration;
-
-
 
     /**
      * ...
@@ -43,8 +43,6 @@ class Checkout
         $this->configuration = $configuration;
     }
 
-
-
     /**
      * ...
      *
@@ -56,14 +54,8 @@ class Checkout
         $controller = $arguments->get('subject');
         $request = $controller->Request();
         $view = $controller->View();
-        $controllerName = $request->getControllerName();
-
 
         // add template dir
         $view->addTemplateDir($this->viewDir);
     }
-
-
-
-
 }
