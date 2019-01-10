@@ -3,10 +3,15 @@
 /**
  * Einrichtungshaus Ostermann GmbH & Co. KG - Print Order
  *
- * Print Order
+ * Adds a "print order" button to the checkout finish site. The consultant can
+ * select a printer via number-input and the order will be sent to the given
+ * printer via cogito soap api.
  *
  * 1.0.0
  * - initial release
+ *
+ * 1.0.1
+ * - fixed plugin name
  *
  * @package   OstPrintOrder
  *
