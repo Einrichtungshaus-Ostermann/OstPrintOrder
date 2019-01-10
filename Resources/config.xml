@@ -15,5 +15,27 @@
             <description>Ist das Plugin live im inhouse?</description>
         </element>
 
+        <element type="button">
+            <name>testButton</name>
+            <label><![CDATA[<b>Test Einstellungen</b>]]></label>
+        </element>
+
+        <element type="textarea">
+            <name>availablePrinters</name>
+            <label>Verfügbare Drucker</label>
+            <value><![CDATA[PRT18
+PRT50
+PRT100]]></value>
+            <description>Welche Drucker gelten als verfügbar?</description>
+        </element>
+
+        <element type="text">
+            <name>validPrinter</name>
+            <label>Gültiger Drucker</label>
+            <value>PRT18</value>
+            <description>Auf welchem verfügbaren Drucker kann tatsächlich gedruckt werden? Bei allen anderen Druckern schlägt der Druck fehl.</description>
+        </element>
+
+
     </elements>
 </config>

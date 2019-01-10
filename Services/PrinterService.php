@@ -41,10 +41,10 @@ class PrinterService implements PrinterServiceInterface
         // are we not live?
         if ($this->configuration['live'] === false) {
             // return default printers
-            return [
-                'PRT18',
-                'PRT100'
-            ];
+            return array_map(
+                function ($printer) { return trim($printer); },
+                explode( '<br>', nl2br( $this->configuration['availablePrinters'], false ) )
+            );
         }
 
         /* @var $api CogitoApiService */
@@ -61,8 +61,8 @@ class PrinterService implements PrinterServiceInterface
     {
         // are we not live?
         if ($this->configuration['live'] === false) {
-            // prt-18 is valid printer
-            if ($printerNumber === '18') {
+            // prt18 is valid printer
+            if ($printerNumber === str_replace("PRT", "", trim($this->configuration['validPrinter']))) {
                 return true;
             }
 

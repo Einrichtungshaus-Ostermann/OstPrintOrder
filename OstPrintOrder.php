@@ -12,6 +12,7 @@
  *
  * 1.0.1
  * - fixed plugin name
+ * - added test configuration
  *
  * @package   OstPrintOrder
  *
