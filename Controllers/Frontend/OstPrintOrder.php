@@ -127,7 +127,7 @@ class Shopware_Controllers_Frontend_OstPrintOrder extends Enlight_Controller_Act
             die();
         }
 
-        $url = 'http://intranet-apswit11/verkaufsassistent/getdefaultprinter';
+        $url = 'http://intranet-apswit11/verkaufsassistent/getdefaultprinterbyip/' . $this->Request()->getClientIp();
 
         $data = file_get_contents($url);
 

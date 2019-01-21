@@ -21,6 +21,9 @@
  * - added default printer
  * - fixed printer list in debug mode
  *
+ * 1.1.1
+ * - fixed default printer
+ *
  * @package   OstPrintOrder
  *
  * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>
