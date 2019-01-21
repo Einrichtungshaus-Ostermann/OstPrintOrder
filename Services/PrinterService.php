@@ -40,11 +40,16 @@ class PrinterService implements PrinterServiceInterface
     {
         // are we not live?
         if ($this->configuration['live'] === false) {
-            // return default printers
-            return array_map(
-                function ($printer) { return trim($printer); },
-                explode( '<br>', nl2br( $this->configuration['availablePrinters'], false ) )
-            );
+            // printer list
+            $list = array();
+
+            // ...
+            foreach ( explode( '<br>', nl2br( $this->configuration['availablePrinters'], false ) ) as $printer )
+                // add it
+                array_push( $list, array( 'Prnt' => trim( $printer ) ) );
+
+            // return it
+            return $list;
         }
 
         /* @var $api CogitoApiService */

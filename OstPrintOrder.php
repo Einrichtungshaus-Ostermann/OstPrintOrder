@@ -17,6 +17,9 @@
  * 1.0.2
  * - fixed printer list api call
  *
+ * 1.1.0
+ * - fixed printer list in debug mode
+ *
  * @package   OstPrintOrder
  *
  * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>
