@@ -36,6 +36,12 @@ PRT100]]></value>
             <description>Auf welchem verfügbaren Drucker kann tatsächlich gedruckt werden? Bei allen anderen Druckern schlägt der Druck fehl.</description>
         </element>
 
+        <element type="text">
+            <name>defaultPrinter</name>
+            <label>Standard Drucker</label>
+            <value>PRT18</value>
+            <description>Welcher Drucker ist der standard Drucker des aktuellen Clients?</description>
+        </element>
 
     </elements>
 </config>

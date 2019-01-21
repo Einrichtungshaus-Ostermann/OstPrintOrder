@@ -18,6 +18,7 @@
  * - fixed printer list api call
  *
  * 1.1.0
+ * - added default printer
  * - fixed printer list in debug mode
  *
  * @package   OstPrintOrder

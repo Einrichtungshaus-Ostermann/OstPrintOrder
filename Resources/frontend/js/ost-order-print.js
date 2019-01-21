@@ -23,7 +23,8 @@
         // configuration
         configuration: {
             checkPrinterUrl: null,
-            printOrderUrl: null
+            printOrderUrl: null,
+            getDefaultPrinterUrl: null
         },
 
         // on initialization
@@ -38,6 +39,7 @@
             // get configuration
             me.configuration.checkPrinterUrl = ostPrintOrderConfiguration.checkPrinterUrl;
             me.configuration.printOrderUrl = ostPrintOrderConfiguration.printOrderUrl;
+            me.configuration.getDefaultPrinterUrl = ostPrintOrderConfiguration.getDefaultPrinterUrl;
 
             // admin delete
             me._on( me.$el, 'click', $.proxy( me.onPrintClick, me ) );
@@ -49,45 +51,56 @@
             // get this
             var me = this;
 
-            // open number input
-            $.ostFoundationNumberInput.open(
-                "Drucker wählen",
+            // try to login
+            $.ostFoundationJson.get(
                 {
-                    castToInteger: false
+                    url: me.configuration.getDefaultPrinterUrl,
+                    method: "post"
                 },
-                function( number ) {
+                function( defaultPrinterResponse ) {
 
-                    // try to login
-                    $.ostFoundationJson.get(
+                    // open number input
+                    $.ostFoundationNumberInput.open(
+                        "Drucker wählen",
                         {
-                            url: me.configuration.checkPrinterUrl,
-                            method: "post",
-                            params: { printer: number }
+                            castToInteger: false,
+                            defaultValue: ( defaultPrinterResponse.success == true ) ? defaultPrinterResponse.printer : ""
                         },
-                        function( response ) {
+                        function( number ) {
 
-                            // ...
-                            if ( response.success == false || response.isAvailable == false )
-                                // show error
-                                return $.ostFoundationAlert.open( "Der Drucker wurde nicht gefunden.", {
-                                    callback: function() {
-                                    }
-                                });
-
-                            // finally print the order
+                            // check if the printer is valid
                             $.ostFoundationJson.get(
                                 {
-                                    url: me.configuration.printOrderUrl,
+                                    url: me.configuration.checkPrinterUrl,
                                     method: "post",
-                                    params: { number: me.number, printer: number }
+                                    params: { printer: number }
                                 },
                                 function( response ) {
 
                                     // ...
-                                    if ( response.success == false  )
-                                        return $.ostFoundationAlert.open( "Die Bestellung konnte nicht gedruckt werden. Bitte versuchen Sie es erneut.", {
+                                    if ( response.success == false || response.isAvailable == false )
+                                        // show error
+                                        return $.ostFoundationAlert.open( "Der Drucker wurde nicht gefunden.", {
+                                            callback: function() {
+                                            }
                                         });
 
+                                    // finally print the order
+                                    $.ostFoundationJson.get(
+                                        {
+                                            url: me.configuration.printOrderUrl,
+                                            method: "post",
+                                            params: { number: me.number, printer: number }
+                                        },
+                                        function( response ) {
+
+                                            // ...
+                                            if ( response.success == false  )
+                                                return $.ostFoundationAlert.open( "Die Bestellung konnte nicht gedruckt werden. Bitte versuchen Sie es erneut.", {
+                                                });
+
+                                        }
+                                    );
                                 }
                             );
                         }

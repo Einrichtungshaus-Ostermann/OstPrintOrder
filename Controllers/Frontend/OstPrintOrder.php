@@ -107,4 +107,40 @@ class Shopware_Controllers_Frontend_OstPrintOrder extends Enlight_Controller_Act
         echo json_encode($response);
         die();
     }
+
+    /**
+     * ...
+     */
+    public function getDefaultPrinterAction()
+    {
+        // ...
+        if ( Shopware()->Container()->get('ost_print_order.configuration')['live'] == false )
+        {
+            // create response
+            $response = [
+                'success' => true,
+                'printer' => str_replace( "PRT", "", Shopware()->Container()->get('ost_print_order.configuration')['defaultPrinter'] )
+            ];
+
+            // echo as json encoded string and die
+            echo json_encode($response);
+            die();
+        }
+
+        $url = 'http://intranet-apswit11/verkaufsassistent/getdefaultprinter';
+
+        $data = file_get_contents($url);
+
+        $arr = json_decode($data, true);
+
+        // create response
+        $response = [
+            'success' => $arr['success'],
+            'printer' => str_replace( "PRT", "", $arr['printer'] )
+        ];
+
+        // echo as json encoded string and die
+        echo json_encode($response);
+        die();
+    }
 }

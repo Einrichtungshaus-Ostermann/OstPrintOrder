@@ -15,8 +15,9 @@
 
         {* javascript variables *}
         var ostPrintOrderConfiguration = {
-            checkPrinterUrl:       '{url controller="OstPrintOrder" action="checkPrinter"}',
-            printOrderUrl:       '{url controller="OstPrintOrder" action="printOrder"}'
+            checkPrinterUrl:      '{url controller="OstPrintOrder" action="checkPrinter"}',
+            printOrderUrl:        '{url controller="OstPrintOrder" action="printOrder"}',
+            getDefaultPrinterUrl: '{url controller="OstPrintOrder" action="getDefaultPrinter"}'
         };
 
     </script>
