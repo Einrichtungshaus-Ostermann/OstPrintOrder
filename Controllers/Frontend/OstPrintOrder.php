@@ -66,8 +66,11 @@ class Shopware_Controllers_Frontend_OstPrintOrder extends Enlight_Controller_Act
         // get every printer
         $printer = $printerService->getList();
 
+        // ...
+        $printerNumbers = array_column($printer, 'Prnt');
+
         // valid printer?
-        $isAvailable = (in_array('PRT' . $number, $printer));
+        $isAvailable = (in_array('PRT' . $number, $printerNumbers));
 
         // create response
         $response = [

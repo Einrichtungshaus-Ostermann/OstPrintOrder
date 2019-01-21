@@ -14,6 +14,9 @@
  * - fixed plugin name
  * - added test configuration
  *
+ * 1.0.2
+ * - fixed printer list api call
+ *
  * @package   OstPrintOrder
  *
  * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>
