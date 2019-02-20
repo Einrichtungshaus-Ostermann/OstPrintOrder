@@ -55,7 +55,7 @@
             $.ostFoundationJson.get(
                 {
                     url: me.configuration.getDefaultPrinterUrl,
-                    method: "post"
+                    method: "get"
                 },
                 function( defaultPrinterResponse ) {
 
@@ -72,7 +72,7 @@
                             $.ostFoundationJson.get(
                                 {
                                     url: me.configuration.checkPrinterUrl,
-                                    method: "post",
+                                    method: "get",
                                     params: { printer: number }
                                 },
                                 function( response ) {
@@ -89,7 +89,7 @@
                                     $.ostFoundationJson.get(
                                         {
                                             url: me.configuration.printOrderUrl,
-                                            method: "post",
+                                            method: "get",
                                             params: { number: me.number, printer: number }
                                         },
                                         function( response ) {
@@ -99,12 +99,21 @@
                                                 return $.ostFoundationAlert.open( "Die Bestellung konnte nicht gedruckt werden. Bitte versuchen Sie es erneut.", {
                                                 });
 
+                                        },
+                                        function( xhr, status ) {
+                                            return $.ostFoundationAlert.open( "Der Drucker hat nicht reagiert.<br />Bitte versuchen Sie es erneut.", {} );
                                         }
                                     );
+                                },
+                                function( xhr, status ) {
+                                    return $.ostFoundationAlert.open( "Der Drucker hat nicht reagiert.<br />Bitte versuchen Sie es erneut.", {} );
                                 }
                             );
                         }
                     );
+                },
+                function( xhr, status ) {
+                    return $.ostFoundationAlert.open( "Der Standard Drucker konnte nicht geladen werden.<br />Bitte versuchen Sie es erneut.", {} );
                 }
             );
         },
