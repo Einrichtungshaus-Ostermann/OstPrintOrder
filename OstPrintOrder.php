@@ -27,6 +27,9 @@
  * 1.1.2
  * - added timeout check when trying to print an order
  *
+ * 1.1.3
+ * - added snippets
+ *
  * @package   OstPrintOrder
  *
  * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>

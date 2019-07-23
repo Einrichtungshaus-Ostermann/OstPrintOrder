@@ -13,16 +13,16 @@
     <div class="finish--teaser panel has--border is--rounded">
 
         <h2 class="panel--title teaser--title is--align-center">
-            Vielen Dank für Ihre Bestellung!
+            {s name="teaser-title"}Glückwunsch, der Auftrag wurde erfolgreich abgeschlossen!{/s}
         </h2>
 
         <div class="panel--body is--wide is--align-center">
             <p>
-                Sie können die Bestellung nun an Ihrem PC ausdrucken.
+                {s name="teaser-message"}Der Auftrag kann jetzt ausgedruckt werden.{/s}
             </p>
             <p class="teaser--actions">
                 <a href="#" class="ost-order-print--button btn is--primary teaser--btn-print" title="Drucken" data-order-number="{$sOrderNumber}">
-                    Drucken
+                    {s name="print-button"}Drucken{/s}
                 </a>
             </p>
         </div>
