@@ -30,6 +30,9 @@
  * 1.1.3
  * - added snippets
  *
+ * 1.1.4
+ * - added automatic opening of print modal in checkout-finish
+ *
  * @package   OstPrintOrder
  *
  * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>

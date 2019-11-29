@@ -130,6 +130,9 @@
     });
 
     // call our plugin
-    $( "body .ost-order-print--button" ).ostOrderPrint();
+    $('body .ost-order-print--button').ostOrderPrint();
+
+    // force the first click
+    $('body.is--ctl-checkout.is--act-finish a.ost-order-print--button.btn').click();
 
 })(jQuery);
